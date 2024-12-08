@@ -180,6 +180,45 @@ library AccessoryDetail {
         );
     }
 
+    /// @notice Return the skin name of the given id
+    /// @param id The skin Id
+    function getItemNameById(uint8 id) public pure returns (string memory name) {
+        name = "";
+        if (id == 1) {
+            name = "None";
+        } else if (id == 2) {
+            name = "Horn Blood";
+        } else if (id == 3) {
+            name = "Small Horn Blood";
+        } else if (id == 4) {
+            name = "Monk Blood";
+        } else if (id == 5) {
+            name = "Horn Moon";
+        } else if (id == 6) {
+            name = "Small Horn Moon";
+        } else if (id == 7) {
+            name = "Monk Moon";
+        } else if (id == 8) {
+            name = "Power Stick";
+        } else if (id == 9) {
+            name = "Kitsune";
+        } else if (id == 10) {
+            name = "Horn Pure";
+        } else if (id == 11) {
+            name = "Small Horn Pure";
+        } else if (id == 12) {
+            name = "Heart";
+        } else if (id == 13) {
+            name = "Monk Pure";
+        } else if (id == 14) {
+            name = "Power Head";
+        } else if (id == 15) {
+            name = "Horn Kin";
+        } else if (id == 16) {
+            name = "Monk Kin";
+        }
+    }
+
     /// @dev The base SVG for the body
     function base(string memory children, string memory name) private pure returns (string memory) {
         return string(abi.encodePacked('<g id="accessory"><g id="', name, '">', children, "</g></g>"));

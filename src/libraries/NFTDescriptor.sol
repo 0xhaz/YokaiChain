@@ -90,4 +90,37 @@ library NFTDescriptor {
             )
         );
     }
+
+    /// @dev generate Json Metadata attributes
+    function generateAttributes(SVGParams memory params) internal pure returns (string memory) {
+        return string(
+            abi.encodePacked(
+                "[",
+                getJsonAttribute("Body", BodyDetail.getItemNameById(params.skin), false),
+                getJsonAttribute("Hair", HairDetail.getItemNameById(params.hair), false),
+                getJsonAttribute("Mouth", MouthDetail.getItemNameById(params.mouth), false),
+                getJsonAttribute("Nose", NoseDetail.getItemNameById(params.nose), false),
+                getJsonAttribute("Eyes", EyesDetail.getItemNameById(params.eye), false),
+                getJsonAttribute("Eyebrow", EyebrowDetail.getItemNameById(params.eyebrow), false),
+                abi.encodePacked(
+                    getJsonAttribute("Mark", MarkDetail.getItemNameById(params.mark), false),
+                    getJsonAttribute("Accessory", AccessoryDetail.getItemNameById(params.accessory), false),
+                    getJsonAttribute("Earrings", EarringsDetail.getItemNameById(params.earring), false),
+                    getJsonAttribute("Mask", MaskDetail.getItemNameById(params.mask), false),
+                    getJsonAttribute("Background", BackgroundDetail.getItemNameById(params.background), true),
+                    "]"
+                )
+            )
+        );
+    }
+
+    /// @dev Get the JSON attribute as
+    /// {"trait_type": "Body", "value": "Skin 1"}
+    function getJsonAttribute(string memory trait, string memory value, bool end)
+        private
+        pure
+        returns (string memory json)
+    {
+        return string(abi.encodePacked('{ "trait_type" : "', trait, '", "value" : "', value, '" }', end ? "" : ","));
+    }
 }
