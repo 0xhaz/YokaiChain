@@ -82,4 +82,16 @@ contract NFTDescriptorTest is Test {
 
         assertEq(generatedDescription, expectedDescription);
     }
+
+    function test_generateAttributes() public view {
+        string memory generatedAttributes = NFTDescriptor.generateAttributes(params);
+
+        string memory expectedAttributes = string(
+            abi.encodePacked(
+                '[{ "trait_type" : "Body", "value" : "Yokai Blood" },{ "trait_type" : "Hair", "value" : "Hair Blood" },{ "trait_type" : "Mouth", "value" : "Neutral" },{ "trait_type" : "Nose", "value" : "Akuma" },{ "trait_type" : "Eyes", "value" : "Happy" },{ "trait_type" : "Eyebrow", "value" : "Kitsune Blood" },{ "trait_type" : "Mark", "value" : "None" },{ "trait_type" : "Accessory", "value" : "None" },{ "trait_type" : "Earrings", "value" : "None" },{ "trait_type" : "Mask", "value" : "None" },{ "trait_type" : "Background", "value" : "Ordinary" }]'
+            )
+        );
+
+        assertEq(generatedAttributes, expectedAttributes);
+    }
 }

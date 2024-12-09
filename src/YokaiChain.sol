@@ -79,4 +79,31 @@ contract YokaiChain is ERC721Enumerable, Ownable, IYokaiChain, ReentrancyGuard {
         require(unitPrice_ <= 18 ether, "YokaiChain: price must be less than or equal to 18 ether");
         unitPrice = unitPrice_;
     }
+
+    /// @notice Enable or disable minting
+    function enableMint() external onlyOwner {
+        mintEnabled = true;
+    }
+
+    /// @notice Get all URIs of an user
+    function getURIs(address user) external view returns (string[] memory) {
+        uint256 numTokens = balanceOf(user);
+        string[] memory uriList = new string[](numTokens);
+        for (uint256 i; i < numTokens; i++) {
+            uriList[i] = tokenURI(tokenOfOwnerByIndex(user, i));
+        }
+
+        return uriList;
+    }
+
+    /// @notice Get all token ids of an user
+    function getIds(address user) public view returns (uint[] memory) {
+        uint numTokens = balanceOf(user);
+        uint[] memory uriList = new uint[](numTokens);
+        for (uint i; i < numTokens; i++) {
+            uriList[i] = tokenOfOwnerByIndex(user, i);
+        }
+
+        return uriList;
+    }
 }
